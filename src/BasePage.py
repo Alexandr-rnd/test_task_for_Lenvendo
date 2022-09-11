@@ -11,10 +11,6 @@ class BasePage():
         self.url = base_url
         self.wait = WebDriverWait(browser, wait)
 
-    # @allure.step('Открыть страницу {base_url}')
-    # def open_page(self, base_url):
-    #     return self.driver.get(base_url)
-
     @allure.step('Найти элемент {locator} убедиться что он виден')
     def find_element(self, locator='locator'):
         return self.wait.until(EC.visibility_of_element_located(locator))

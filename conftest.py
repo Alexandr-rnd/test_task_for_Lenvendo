@@ -9,6 +9,8 @@ def pytest_addoption(parser):
     parser.addoption("--browser", default="chrome")
     parser.addoption("--driver_path", default="C:\drivers")
     parser.addoption("--url", default="qa.digift.ru/", )
+    parser.addoption("--search", default="Alcatel")
+    parser.addoption("--sort_field", default='name', choices=['name', 'price'])  # name
 
 
 def kreds():
@@ -39,3 +41,11 @@ def browser(request):
     request.addfinalizer(fin)
     driver.maximize_window()
     return driver
+
+
+@pytest.fixture
+def telephone_filters(request):
+    arguments = {}
+    arguments['search'] = request.config.getoption("--search")
+    arguments['sort_field'] = request.config.getoption("--sort_field")
+    return arguments
